@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Hero} from './hero';
 import {HEROES} from './mock-heroes';
 import {Observable, of} from 'rxjs';
+import {MessageService} from './message.service';
 // decorator accepts a metadata object for the service
 @Injectable({
   // provider is something that can create or deliver a service
@@ -10,8 +11,8 @@ import {Observable, of} from 'rxjs';
   providedIn: 'root'
 })
 export class HeroService {
-
-  constructor() { }
+  // service-in-service
+  constructor(private messageService: MessageService) { }
 
   // method has a synchronous signature
   // getHeroes(): Hero[] {
@@ -20,6 +21,7 @@ export class HeroService {
 
  // must have an asynchronous signature
   getHeroes(): Observable<Hero[]> {
+    this.messageService.add('HeroService: fetched heroes');
     return of(HEROES);
   }
 
