@@ -1,8 +1,18 @@
-<h2>Details of {{hero.name}}</h2>
-<div><span>ID   : </span> {{hero.id}}</div>
-<div>
-  <label>
-    NAME:
-    <input [(ngModel)]="hero.name" placeholder="Enter name here">
-  </label>
-</div>
+<!--Usage of attribute-->
+  <!--<h2>Details of {{hero.name}}</h2>-->
+  <!--<div><span>ID   : </span> {{hero.id}}</div>-->
+  <!--<div>-->
+  <!--  <label>-->
+  <!--    NAME:-->
+  <!--    <input [(ngModel)]="hero.name" placeholder="Enter name here">-->
+  <!--  </label>-->
+  <!--</div>-->
+
+
+<!--Usage of list of attributes-->
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <li *ngFor="let hero of heroes">
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  </li>
+</ul>
