@@ -6,6 +6,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'heroes', component: HeroesComponent },
+  { path: 'detail/:id', component: HeroesComponent }, // parameterized route
   { path: 'dashboard', component: DashboardComponent }
 ];
 
