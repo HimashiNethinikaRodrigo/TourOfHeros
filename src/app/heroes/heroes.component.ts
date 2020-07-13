@@ -17,11 +17,11 @@ export class HeroesComponent implements OnInit {
 
   // expose heroes array for binding
   heroes: Hero [];
-  selectedHero: Hero;
 
   // inject Hero Service
-  constructor(private heroService: HeroService, private messageService: MessageService) {
-  }
+  // constructor(private heroService: HeroService, private messageService: MessageService) {
+  // }
+  constructor(private heroService: HeroService) { }
 
   ngOnInit(): void {
     this.getHeroes();
