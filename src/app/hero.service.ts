@@ -3,6 +3,8 @@ import {Hero} from './hero';
 import {HEROES} from './mock-heroes';
 import {Observable, of} from 'rxjs';
 import {MessageService} from './message.service';
+import {HttpClient} from '@angular/common/http';
+import {catchError, map, tap} from 'rxjs/operators';
 // decorator accepts a metadata object for the service
 @Injectable({
   // provider is something that can create or deliver a service
@@ -11,8 +13,13 @@ import {MessageService} from './message.service';
   providedIn: 'root'
 })
 export class HeroService {
+  private heroesUrl = 'api/heroes';  // URL to web api
+
+
   // service-in-service
-  constructor(private messageService: MessageService) { }
+  constructor(
+    private httpClient: HttpClient,
+    private messageService: MessageService) { }
 
   // method has a synchronous signature
   // getHeroes(): Hero[] {
@@ -21,13 +28,20 @@ export class HeroService {
 
  // must have an asynchronous signature
   getHeroes(): Observable<Hero[]> {
-    this.messageService.add('HeroService: fetched heroes');
-    return of(HEROES);
+    return this.httpClient.get<Hero []>(this.heroesUrl)
+      .pipe(
+        // catchError(this.handleError<Hero[]>('getHeroes', []))
+      );
   }
 
   getHero(id: number): Observable<Hero> {
-    this.messageService.add('HeroService: fetched hero');
     return of(HEROES.find(hero => hero.id = id));
   }
+
+  /** Log a HeroService message with the MessageService */
+  private log(message: string) {
+    this.messageService.add(`HeroService: ${message}`);
+  }
+
 
 }
